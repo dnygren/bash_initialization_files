@@ -2,9 +2,9 @@ bash initialization files README                         D. Nygren  02 Oct 2019
 --------------------------------------------------------------------------------
 
     Place these files in your home directory and make them readable by the user.
-Read the comments in the files and the bash man page for detailed information on
-the operation of these files.
+Read the comments in the files and the bash man page for more details on their
+operation.
 
 The current order of execution is:
-~/.bash_profile calls ~/.bashrc when it completes
-~/.bashrc calls calls ~/.bash_aliases and ~/.bash_functions when it starts.
+~/.bash_profile calls ~/.bashrc when the former completes.
+~/.bashrc calls calls ~/.bash_aliases and ~/.bash_functions at its start.
