@@ -24,7 +24,7 @@
 umask 077
 
 #### Various utilities want a default editor defined
-export EDITOR="/usr/bin/gvim"
+export EDITOR="/usr/bin/vim"
 
 #### For enscript
 export NAME="Dan Nygren"
