@@ -1,11 +1,11 @@
 # Used with the Zedboard attached via USB to the laptop
 alias mc='echo Make sure board attached to serial port is on.;
 echo Make sure only one minicom application running on this port;
-sudo minicom -D /dev/ttyACM0 -b 115200 -8 -w' 
+sudo minicom -D /dev/ttyACM0 -b 115200 -8 -w'
 alias petalinux-source='source /opt/pkg/petalinux/settings.sh ; echo PETALINUX = $PETALINUX'
 
 # Often (but not always) helps resolve KDE Plasma Desktop lockup issues
-alias restart-plasma='killall plasmashell ; sleep 5 ;kstart plamsashell'
+alias restart-plasma='killall plasmashell ;sleep 5 ;kstart plamsashell'
 
 # VNC
 alias vncdell='/usr/bin/vncserver -geometry 2560x1440'
@@ -28,4 +28,4 @@ alias vncpanasonic='/usr/bin/vncserver -geometry 1920x1080'
 # For Toshiba Laptop
 #alias vnctoshiba='/usr/bin/vncserver -depth 32 -geometry 1540x768 -alwaysshared -fp tcp/localhost:7100'
 # For View Sonic Monitor
-#alias vncviewsonic='/usr/bin/vncserver -depth 32 -geometry 1680x976 -alwaysshared -fp tcp/localhost:7100' 
+#alias vncviewsonic='/usr/bin/vncserver -depth 32 -geometry 1680x976 -alwaysshared -fp tcp/localhost:7100'

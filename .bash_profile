@@ -55,14 +55,6 @@ export PATH=$PATH:.
 # ("dmake -j <# of jobs>", or set the DMAKE_MAX_JOBS environment variable).
 # export DMAKE_MAX_JOBS=999
 
-#### history-search-backward
-# Type a few characters of the command then press the up or down arrow keys.
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
-# The command "bind -P" should now say:
-# history-search-backward can be found on "\e[A".
-# history-search-forward can be found on "\e[B".
-
 # Source the users bashrc if it exists
 if [ -f "${HOME}/.bashrc" ] ; then
   source "${HOME}/.bashrc"
