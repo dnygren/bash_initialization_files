@@ -5,32 +5,32 @@
 #
 # Note wildcards must be enclosed with single quotes on the command line or
 # they will be passed to this function already expanded which is likely not
-# what the user intended. 
+# what the user intended.
 #
 # Example findfile '*.xls'
 ################################################################################
 function findfile
 {
-	echo "Not searching hidden .snapshot NetApp directories"
+    echo "Not searching hidden .snapshot NetApp directories"
         #find . -name "$1" -print
-	find . -path ./.snapshot -prune -o -name "$1" -print
+    find . -path ./.snapshot -prune -o -name "$1" -print
 }
 
 # Same as above but directs stderr to /dev/null.
 # Handy when lots of files and directories in tree have permission issues.
 function findfilequiet
 {
-	find . -name "$1" -print 2>/dev/null
+    find . -name "$1" -print 2>/dev/null
 }
 
 ################################################################################
-# Find a string in any file in a file tree, 
-# ignoring case, print only one line, 
-# no matter how many instances found in a file 
+# Find a string in any file in a file tree,
+# ignoring case, print only one line,
+# no matter how many instances found in a file
 ################################################################################
-function findstring 
-{ 
-	echo "Ignoring case"
+function findstring
+{
+    echo "Ignoring case"
 # find . -type f -exec grep -li "$*" {} \; #Usage: findstring string
 # pass at least 2 filenames to grep so grep will always print the filenames
     find . -type f -exec grep -li "$*" /dev/null {} +
@@ -38,9 +38,9 @@ function findstring
 
 # Same as above but directs stderr to /dev/null.
 # Handy when lots of files and directories in tree have permission issues.
-function findstringquiet 
-{ 
-	echo "Ignoring case"
+function findstringquiet
+{
+    echo "Ignoring case"
     find . -type f -exec grep -li "$*" /dev/null {} + 2>/dev/null
 }
 
@@ -52,7 +52,7 @@ function findstringquiet
 ################################################################################
 function findbig
 {
-	/usr/bin/find . -path ./.snapshot -prune -o -size +$1c -print0 | \
+    /usr/bin/find . -path ./.snapshot -prune -o -size +$1c -print0 | \
             /usr/bin/xargs -0 --no-run-if-empty ls -lh | sort -h -r -k 5
 }
 
@@ -63,23 +63,23 @@ function findbig
 ################################################################################
 function mark
 {
-	eval d_$1=$PWD
+    eval d_$1=$PWD
 }
 function go
 {
-	eval cd \$d_$1
+    eval cd \$d_$1
 }
 ################################################################################
 # Take a snapshot of an X-window and covert it to a PNG
 ################################################################################
 function snapshot
 {
-	YEARDAY=$(/usr/xpg4/bin/date '+%C%y-%m-%dT%H%M%S')
-	/usr/bin/xwd | /usr/bin/convert - snapshot.$YEARDAY.png
-	# Commented out as "display" doesn't work on Sunray, so use gimp
-	/usr/bin/display snapshot.$YEARDAY.png
+    YEARDAY=$(/usr/xpg4/bin/date '+%C%y-%m-%dT%H%M%S')
+    /usr/bin/xwd | /usr/bin/convert - snapshot.$YEARDAY.png
+    # Commented out as "display" doesn't work on Sunray, so use gimp
+    /usr/bin/display snapshot.$YEARDAY.png
     # Commented out GIMP when they fixed Imagemagick "display"
-	#/usr/sfw/bin/gimp snapshot.$YEARDAY.png
+    #/usr/sfw/bin/gimp snapshot.$YEARDAY.png
 }
 
 ################################################################################
@@ -88,25 +88,27 @@ function snapshot
 ################################################################################
 function twopostscript
 {
-	/usr/dist/share/acroread,v5.08/bin/acroread -toPostScript $1
-	/pkg/local/bin/mpage -2 ${1%.pdf}.ps | /pkg/local/bin/psset -d > ${1%.pdf}_2d.ps
-	ls -la ${1%.pdf}_2d.ps
+    /usr/dist/share/acroread,v5.08/bin/acroread -toPostScript $1
+    /pkg/local/bin/mpage -2 ${1%.pdf}.ps | /pkg/local/bin/psset -d > \
+        ${1%.pdf}_2d.ps
+    ls -la ${1%.pdf}_2d.ps
 }
 
 ################################################################################
 # Make exporting the DISPLAY less annoying
-# Usage: e IP.AD.DR.ES 
+# Usage: e IP.AD.DR.ES
 ################################################################################
 function e
 {
-	export DISPLAY="$1":0.0
+    export DISPLAY="$1":0.0
 }
 ################################################################################
 # Sort directories by size of contents
 ################################################################################
 function findbigdir
 {
-	/usr/bin/find . -type d -print0 | /usr/bin/xargs -0 -n1 du -sk | sort -n
+    /usr/bin/find . -type d -print0 | /usr/bin/xargs -0 -n1 du -sk | \
+            sort -n
 }
 
 ################################################################################
@@ -114,7 +116,7 @@ function findbigdir
 ################################################################################
 function shrinkjpg
 {
-	/usr/bin/convert -quality 15 $1 ${1%.jpg}_q15.jpg
+    /usr/bin/convert -quality 15 $1 ${1%.jpg}_q15.jpg
 }
 
 ################################################################################
@@ -130,34 +132,34 @@ ssh-add
 ################################################################################
 function build
 {
-	~/bin/ssx scapen-cs11u3-0
+    ~/bin/ssx scapen-cs11u3-0
 }
 function build2
 {
-	~/bin/ssx scapen-cs11u3-2
+    ~/bin/ssx scapen-cs11u3-2
 }
 function build4
 {
-	~/bin/ssx scapen-cs11u2-0
+    ~/bin/ssx scapen-cs11u2-0
 }
 ################################################################################
 # ssh to a certain simulation server
 ################################################################################
 function sim
 {
-	~/bin/ssx dt240-161
+    ~/bin/ssx dt240-161
 }
 
 ################################################################################
-# Find a string in any file in a file tree, 
-# ignoring case, print only one line, 
-# no matter how many instances found in a file 
+# Find a string in any file in a file tree,
+# ignoring case, print only one line,
+# no matter how many instances found in a file
 # Example: find . -name "errno.h" -exec grep -li "EINVAL" /dev/null {} +
 # Example: findstringinfile EINVAL errno.h
 ################################################################################
-function findstringinfile 
+function findstringinfile
 {
-	find . -name "$2" -exec grep -li "$1" /dev/null {} +
+    find . -name "$2" -exec grep -li "$1" /dev/null {} +
 }
 
 ################################################################################
@@ -166,20 +168,20 @@ function findstringinfile
 ################################################################################
 function dmake
 {
-	# $@ used to accept "dmake lint" "dmake clean" etc.
-	/ws/onnv-tools/SUNWspro/SS12/bin/dmake $@
+    # $@ used to accept "dmake lint" "dmake clean" etc.
+    /ws/onnv-tools/SUNWspro/SS12/bin/dmake $@
 }
 function dmakeg
 {
-	/ws/onnv-tools/SUNWspro/SS12/bin/dmake -e COMPILER=GNU $@
+    /ws/onnv-tools/SUNWspro/SS12/bin/dmake -e COMPILER=GNU $@
 }
 ################################################################################
 # spell $Revision$ :  A non-interactive quick and dirty spell check
 #
 # by Dan Nygren $Date$
-# E-mail: dan.nygren@gmail.com 
+# E-mail: dan.nygren@gmail.com
 #
-# 	spell is a non-interactive spell check similar to the original Unix
+#     spell is a non-interactive spell check similar to the original Unix
 # spell command. Add this to your ~/.bash_functions and invoke as "spell
 # source_code.c" etc.  Page through the output using the spacebar and observe
 # any spelling errors while ignoring obvious software constructs. Then go back
@@ -192,7 +194,7 @@ function dmakeg
 #
 # TARGET SYSTEM         Linux
 #
-# DEVELOPMENT SYSTEM    Debian 9 Linux  
+# DEVELOPMENT SYSTEM    Debian 9 Linux
 #
 # CALLS                 hunspell, sort, uniq, less
 #
@@ -206,12 +208,12 @@ function dmakeg
 #
 # ERROR HANDLING        N/A
 #
-# WARNINGS              
-#			Note you can install hunspell and the US English
-#			dictionary on Debian Linux with the following
-#			commands (assumes you have sudo access):
-#			$ sudo apt install hunspell
-#			$ sudo apt install hunspell-en-us
+# WARNINGS
+#            Note you can install hunspell and the US English
+#            dictionary on Debian Linux with the following
+#            commands (assumes you have sudo access):
+#            $ sudo apt install hunspell
+#            $ sudo apt install hunspell-en-us
 #
 ###########################################################################
 function spell
@@ -224,27 +226,29 @@ function spell
 ################################################################################
 function howmany
 {
-	who | sort | cut -d' ' -f1 | uniq | wc -l
+    who | sort | cut -d' ' -f1 | uniq | wc -l
 }
 ################################################################################
 # Enscript printing
 ################################################################################
 function 1up
 {
-	/usr/bin/enscript -G --pretty-print --font=Courier11 "$1"
+    /usr/bin/enscript -G --pretty-print --font=Courier11 "$1"
 }
 function 2up
 {
-	/usr/bin/enscript -2rlG --pretty-print "$1"
+    /usr/bin/enscript -2rlG --pretty-print "$1"
 }
 function landscape
 {
-	/usr/bin/enscript -G --pretty-print --font=Courier7 --landscape "$1"        
+    /usr/bin/enscript -G --pretty-print --font=Courier7 --landscape "$1"
 }
 function gutenberg
 {
-	/usr/bin/enscript -2 --landscape --borders --header='$n Page $% of $=' --filter="fmt -w 80 %s" --font=NewCenturySchlbk-Roman9 "$1" --output  "$1".ps
-# --encoding=dos --page-label-format=short  --filter="dos2unix -ascii < %s | fmt -w 72" --font=Times-Roman12
+    /usr/bin/enscript -2 --landscape --borders --header='$n Page $% of $=' \
+--filter="fmt -w 80 %s" --font=NewCenturySchlbk-Roman9 "$1" --output  "$1".ps
+# --encoding=dos --page-label-format=short  --filter="dos2unix -ascii < %s | \
+# fmt -w 72" --font=Times-Roman12
 }
 
 ################################################################################
@@ -254,21 +258,21 @@ function gutenberg
 ################################################################################
 function vnckill
 {
-	/usr/bin/vncserver -kill :$1
+    /usr/bin/vncserver -kill :$1
 }
 ################################################################################
 # Tells which ssh sessions are mine
 ################################################################################
 function sshwhich
 {
-	 ps -ef | grep 'nygren' | grep 'ssh'
+     ps -ef | grep 'nygren' | grep 'ssh'
 }
 ################################################################################
 # Tells which vnc sessions are mine
 ################################################################################
 function vncwhich
 {
-	 ps -ef | grep 'nygren' | grep 'vnc'
+     ps -ef | grep 'nygren' | grep 'vnc'
 }
 ################################################################################
 # Set up ssh tunnel to VNC server using an IP address
@@ -317,11 +321,13 @@ function vnciptunnel
 # -f ssh to background
 # -l user login on remote host
 
-    IP_ADDRESS=$(/usr/bin/nslookup $VNC_SERVER | /bin/grep "Address: " | /usr/bin/cut -d' ' -f2)
+    IP_ADDRESS=$(/usr/bin/nslookup $VNC_SERVER | /bin/grep "Address: " | \
+/usr/bin/cut -d' ' -f2)
 
     echo $IP_ADDRESS
     echo $USER_NAME
-    /usr/bin/ssh -L $(($BASE_PORT + $1)):localhost:$(($BASE_PORT + $1)) -N -f -l $USER_NAME $IP_ADDRESS
+    /usr/bin/ssh -L $(($BASE_PORT + $1)):localhost:$(($BASE_PORT + $1)) -N -f \
+-l $USER_NAME $IP_ADDRESS
 }
 ################################################################################
 # Set up an ssh tunnel to the VNC server.
@@ -371,7 +377,8 @@ function vnctunnel
 
     echo $VNC_SERVER
     echo $USER_NAME
-    /usr/bin/ssh -L $(($BASE_PORT + $1)):localhost:$(($BASE_PORT + $1)) -N -f $USER_NAME@$VNC_SERVER
+    /usr/bin/ssh -L $(($BASE_PORT + $1)):localhost:$(($BASE_PORT + $1)) -N \
+-f $USER_NAME@$VNC_SERVER
 }
 function remotevnctunnel
 {
@@ -396,7 +403,8 @@ function remotevnctunnel
 
     echo $SSH_SERVER
     echo $USER_NAME
-    /usr/bin/ssh -L $(($BASE_PORT + $1)):localhost:$(($BASE_PORT + $1)) -N -f $USER_NAME@$SSH_SERVER
+    /usr/bin/ssh -L $(($BASE_PORT + $1)):localhost:$(($BASE_PORT + $1)) -N \
+-f $USER_NAME@$SSH_SERVER
 }
 ################################################################################
 # View a numbered vnc session without having to keep a terminal open
@@ -412,7 +420,7 @@ function vncv
         return 1 # return false
     fi
 
-	nohup /usr/bin/vncviewer :$1 &
+    nohup /usr/bin/vncviewer -RemoteResize :$1 &
 }
 
 # One line calculator (e.g. $calc 1 + 1)
