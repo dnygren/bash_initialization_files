@@ -1,12 +1,12 @@
-bash initialization files README                         D. Nygren  21 Oct 2019
+bash initialization files README                         D. Nygren  30 Apr 2019
 --------------------------------------------------------------------------------
 
     Place these files in your home directory and make them readable by the user.
 Read the comments in the files and the bash man page for more details on their
 operation.
 
-~/.bash_profile is only used for the initial bash login shell. Therefore
-~/.bashrc is typically sourced by ~/.bash_profile.
+~/.bash_profile is only used for the initial bash login shell, therefore
+the ~/.bashrc file is typically sourced by ~/.bash_profile.
 
 ~/.bashrc is used for all other bash shells created.
 

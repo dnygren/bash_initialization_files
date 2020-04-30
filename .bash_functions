@@ -11,6 +11,7 @@
 ################################################################################
 function findfile
 {
+    echo "Enclose wildcards with 'single*' quotes"
     echo "Not searching hidden .snapshot NetApp directories"
         #find . -name "$1" -print
     find . -path ./.snapshot -prune -o -name "$1" -print
