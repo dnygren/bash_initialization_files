@@ -21,7 +21,9 @@ esac
 
 # Default printer
 #export PRINTER=cm4521u
-export PRINTER=cm4521_dbl
+#export PRINTER=cm4521_dbl
+#export PRINTER=c5550
+export PRINTER=c5550_dbl
 
 # Set vi editing mode option
 # Broken?

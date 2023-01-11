@@ -1,0 +1,6 @@
+#! /bin/bash
+cp ~/.bash_aliases /net/n/home/nygren
+cp ~/.bash_functions /net/n/home/nygren
+cp ~/.bash_logout /net/n/home/nygren
+cp ~/.bash_profile /net/n/home/nygren
+cp ~/.bashrc /net/n/home/nygren

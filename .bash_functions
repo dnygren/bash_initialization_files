@@ -219,7 +219,10 @@ function dmakeg
 ###########################################################################
 function spell
 {
-    hunspell -l $* | sort | uniq | less
+#    hunspell -l $* | sort | uniq | less
+# My "-I Ignore file extensions" changes so hunspell will work with XML files
+    /home/nygren/mms_nygren/SW/GitHub/hunspell_dan/src/tools/hunspell -l -I \
+    $* | sort | uniq | less
 }
 
 ################################################################################
@@ -234,15 +237,15 @@ function howmany
 ################################################################################
 function 1up
 {
-    /usr/bin/enscript -G --pretty-print --font=Courier11 "$1"
+    /usr/bin/enscript -G --pretty-print --font=Courier11 --media=Letter "$1"
 }
 function 2up
 {
-    /usr/bin/enscript -2rlG --pretty-print "$1"
+    /usr/bin/enscript -2rlG --pretty-print --media=Letter "$1"
 }
 function landscape
 {
-    /usr/bin/enscript -G --pretty-print --font=Courier7 --landscape "$1"
+    /usr/bin/enscript -G --pretty-print --font=Courier7 --landscape --media=Letter "$1"
 }
 function gutenberg
 {
@@ -321,13 +324,14 @@ function vnciptunnel
 # -N Just port forward
 # -f ssh to background
 # -l user login on remote host
+# -C requests compression of all data    
 
     IP_ADDRESS=$(/usr/bin/nslookup $VNC_SERVER | /bin/grep "Address: " | \
 /usr/bin/cut -d' ' -f2)
 
     echo $IP_ADDRESS
     echo $USER_NAME
-    /usr/bin/ssh -L $(($BASE_PORT + $1)):localhost:$(($BASE_PORT + $1)) -N -f \
+    /usr/bin/ssh -CL $(($BASE_PORT + $1)):localhost:$(($BASE_PORT + $1)) -N -f \
 -l $USER_NAME $IP_ADDRESS
 }
 ################################################################################
@@ -347,7 +351,7 @@ function vnciptunnel
 # Example:  home  $ remotevnctunnel 1
 #           home  $ ssh -l nygren tenhut.example.com
 #           tenhut$ vnctunnel 1
-#           tenhut$ ssh -l nygren <server like mmo-proc>
+#           tenhut$ ssh -l nygren <server like mms-proc>
 #           server$ vncserver
 #           home  $ nohup vncviewer :1 & <OR> Windows tightvnc localhost:1
 #           (Do whatever on VNC)
