@@ -8,6 +8,8 @@ echo PETALINUX = $PETALINUX'
 # Often (but not always) helps resolve KDE Plasma Desktop lockup issues
 alias restart-plasma='killall plasmashell ;sleep 5 ;kstart plamsashell'
 
+# Qt based file manager
+alias fm='pcmanfm-qt'
 # Remote nfsweb access
 alias remotenfsweb='/usr/bin/ssh -CL 8080:nfsweb.msss.com:80 nygren@tarkas.msss.com'
 # VNC

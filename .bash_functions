@@ -17,6 +17,15 @@ function findfile
     find . -path ./.snapshot -prune -o -name "$1" -print
 }
 
+# Find a directory in a file tree
+function finddir
+{
+    echo "Enclose wildcards with 'single*' quotes"
+    echo "Not searching hidden .snapshot NetApp directories"
+        #find . -name "$1" -print
+    find . -path ./.snapshot -prune -o -type d -name "$1" -print
+}
+
 # Same as above but directs stderr to /dev/null.
 # Handy when lots of files and directories in tree have permission issues.
 function findfilequiet
